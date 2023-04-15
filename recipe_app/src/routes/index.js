@@ -49,6 +49,7 @@ import Recipe_from from '../components/Recipe_form.vue'
 import Register from '../components/Register.vue';
 import Login from '../components/Login.vue';
 import Recipes from "../components/RecipeList.vue";
+import Recipe from "../components/RecipeListItem.vue"
 // import Data from '../components/Data.vue';
 // import Router from 'vue-router'
 // import Vue from 'vue'
@@ -75,8 +76,14 @@ const routes = [
   },
   {
     path: '/recipes',
-    name: 'recipeis',
+    name: 'recipes',
     component: Recipes,
+  },
+  {
+    path: '/recipes/item/:id',
+    name: 'recipe',
+    component: Recipe,
+
   }
 ];
 

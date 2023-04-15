@@ -1,8 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="bg-blue-200 min-h-screen flex items-center">
+  <div class="min-h-screen flex items-center absolute inset-x-0 top-0">
     <div class="w-full">
-      <h2 class="text-center text-blue-400 font-bold text-2xl uppercase mb-10">
+      <h2 class="text-center text-black font-bold text-2xl uppercase mb-10">
         Recipe Form
       </h2>
       <div class="bg-white p-5 rounded-lg shadow md:w-3/4 mx-auto lg:w-2/5">
@@ -90,7 +90,16 @@
               v-model="dietary_restrictions"
             />
           </div>
-
+          <div class="">
+            <input
+              type="file"
+              ref="recipe_image"
+              accept="image/png, image/jpeg"
+              alt="My Image"
+            />
+            <button type="submit">Upload</button>
+          </div>
+          <br />
           <button
             class="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg"
             @click="submit"
@@ -109,13 +118,13 @@ export default {
   name: "Recipe_form",
   data() {
     return {
-      title: " ",
-      ingredients: " ",
-      cooking_instructions: " ",
-      time_taken: " ",
-      cusine_type: " ",
+      title: "",
+      ingredients: "",
+      cooking_instructions: "",
+      time_taken: "",
+      cusine_type: "",
       is_public: false,
-      dietary_restrictions: " ",
+      dietary_restrictions: "",
     };
   },
   methods: {
@@ -130,6 +139,10 @@ export default {
       recipeData.append("cuisine_type", this.cusine_type);
       //recipeData.append("is_public", this.is_public);
       recipeData.append("dietary_restrictions", this.dietary_restrictions);
+      console.log(this.$refs.recipe_image.files);
+      if (this.$refs.recipe_image.files.length == 1) {
+        recipeData.append("recipe_image", this.$refs.recipe_image.files[0]);
+      }
 
       axios
         .post("http://localhost:3000/recipes", recipeData)

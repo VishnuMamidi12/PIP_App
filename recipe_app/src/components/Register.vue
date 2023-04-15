@@ -1,6 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="bg-grey-lighter min-h-screen flex flex-col">
+  <div
+    class="bg-grey-lighter min-h-screen flex flex-col absolute inset-x-0 top-0"
+  >
     <div
       class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2"
     >
@@ -46,7 +48,7 @@
 
         <button
           type="submit"
-          class="w-full text-center py-3 rounded bg-green hover:bg-green-dark focus:outline-none my-1"
+          class="w-full text-center py-3 shadow-lg shadow-indigo-500/40"
           @click="submit"
         >
           Create Account
@@ -73,7 +75,7 @@
       <div class="text-grey-dark mt-6">
         Already have an account?
 
-        <router-link to="/login">Login</router-link>
+        <router-link to="/login" class="text-blue-600">Login</router-link>
       </div>
     </div>
   </div>
@@ -86,6 +88,8 @@ export default {
   name: "Register",
   data() {
     return {
+      showAlert: false,
+      alertMessage: "",
       first_name: null,
       last_name: null,
       email: null,

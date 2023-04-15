@@ -32,9 +32,16 @@ class RecipesController < ApplicationController
       end
 
       def title
-        @recipes = Recipe.where("title ILIKE ?", "%#{params[:title]}%")
-        @recipes = Recipe.where("cuisine_type ILIKE ?", "%#{params[:cuisine_type]}%")
-        render json: @recipes
+        @recipe = Recipe.find(params[:id])
+        # @recipe = Recipe.where("title LIKE ?", "%#{params[:title]}%").first
+        # @recipe = Recipe.where("cuisine_type ILIKE ?", "%#{params[:cuisine_type]}%")
+        render json: @recipe
+      end
+
+      def destroy
+        @recipes = Recipe.find(params[:id])
+        @recipes.destroy
+        render json: {message: "Recipe Deleted sucessfully"}, status: :ok
       end
 
     def recipe_params

@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div
     class="font-sans text-black w-full bg-fuchsia-900 flex items-center justify-center absolute top-0 pr-12"
@@ -22,37 +21,34 @@
       <router-link to="/recipe_create" class="">Crete a new recipe</router-link>
     </div>
   </div>
-  <div
-    v-if="recipies.length > 0"
-    class="flex flex-row pt-6 flex flex-wrap lg:-mx-1 lg:-mx-4"
-  >
-    <div
-      v-for="recipe in recipies"
-      v-bind:key="recipe.id"
-      class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3"
-    >
-      <div class="max-w-sm rounded overflow-hidden shadow-lg h-80">
-        <a :href="recipe.recipe_url">
-          <img class="w-full" :src="recipe.recipe_image" alt="" />
-
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">
-              {{ recipe.title }}
-            </div>
-          </div>
-        </a>
-        <div class="px-6 pt-4 pb-2"></div>
-      </div>
+  <div class="grid justify-items-center">
+    <img class="object-fill h-48 w-96" :src="recipe.recipe_image" alt="" />
+  </div>
+  <div class="text-fuchsia-900">
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2">Recipe Name:{{ recipe.title }}</div>
+    </div>
+    <div class="font-bold text-xl mb-1">
+      Cooking Instructions: {{ recipe.cooking_instructions }}
+    </div>
+    <div class="font-bold text-xl mb-2">
+      Time Taken: {{ recipe.time_tiken }}
+    </div>
+    <div class="font-bold text-xl mb-2">
+      Cusine Type: {{ recipe.cuisine_type }}
+    </div>
+    <div class="font-bold text-xl mb-2">
+      Dietary Restrictions: {{ recipe.dietary_restrictions }}
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
 export default {
-  name: "RecipeList",
+  name: "RecipeListItem",
   data() {
     return {
-      recipies: [],
+      recipe: [],
       title: " ",
       ingredients: " ",
       cooking_instructions: " ",
@@ -67,11 +63,14 @@ export default {
   },
   methods: {
     fetchRecipies() {
+      const id = this.$route.params.id;
       axios
-        .get("http://localhost:3000/recipes/item")
+        .get(`http://localhost:3000/title/${id}`)
         .then((res) => {
           console.log(res);
-          this.recipies = res.data.recipes;
+          console.log(res);
+          this.recipe = res.data;
+          console.log(this.recipe);
         })
         .catch((error) => {
           console.log(error);
@@ -80,4 +79,3 @@ export default {
   },
 };
 </script>
-<style scoped></style>

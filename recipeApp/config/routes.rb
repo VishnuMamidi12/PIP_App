@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post '/recipes' => 'recipes#create'
   get  '/recipes/item' => 'recipes#index'
   get  '/recipes/:id' => 'recipes#show'
-  get  '/title/:title' => 'recipes#title'
+  get  '/title/:id' => 'recipes#title'
   get  '/cusine/:title' => 'recipes#title'
+  delete 'recipes/delete/:id' => 'recipes#destroy'
 end
