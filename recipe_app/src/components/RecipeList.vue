@@ -29,7 +29,7 @@
     <div
       v-for="recipe in recipies"
       v-bind:key="recipe.id"
-      class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3"
+      class="my-1 px-1 md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3"
     >
       <div class="max-w-sm rounded overflow-hidden shadow-lg h-80">
         <a :href="recipe.recipe_url">
